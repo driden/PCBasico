@@ -1,0 +1,8 @@
+with Productor;
+use Productor;
+procedure Main is
+p: Productorctor.TProductor;
+begin
+   p;
+   null;
+end Main;

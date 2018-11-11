@@ -1,0 +1,6 @@
+package Productor is
+
+   task type TProductor is
+   end TProductor;
+
+end Productor;
