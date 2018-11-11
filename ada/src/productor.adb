@@ -1,6 +1,8 @@
 
 with Ada.Text_IO; use Ada.Text_IO;
+with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
 with Ada.Numerics.Discrete_Random;
+with BufferPC;
 
 package body Productor is
    task body TProductor is
@@ -8,7 +10,7 @@ package body Productor is
    begin
       loop
          Producir (x);
-         -- BUFFER INSERT
+         BufferPC.TBuffer.ins(x);
       end loop;
    end TProductor;
 
@@ -20,6 +22,9 @@ package body Productor is
    begin
       Reset(G);
       x := Random (G);
+      Put("Produciendo el numero ");
+      Put(x);
+      New_Line(1);
    end Producir;
 
 end Productor;

@@ -1,5 +1,5 @@
 package Consumidor is
 
-   task TConsumidor;
+   task type TConsumidor;
 
 end Consumidor;
