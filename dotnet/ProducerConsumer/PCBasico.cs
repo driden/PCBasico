@@ -6,7 +6,7 @@ namespace ProducerConsumer
 {
     internal class PCBasico
     {
-        const int BufferSize = 10;
+        const int BufferSize = 5;
         int[] buffer = new int[BufferSize];
         int pai, pae, cantProd, cantCons, cant = 0;
         SemaphoreSlim esUsado = new SemaphoreSlim(1);

@@ -72,7 +72,7 @@ procedure Main is
       end loop;
    end TProductor;
 
-   c1, c2, c3, c4, c5, c6  : TConsumidor;
+   c1, c2, c3  : TConsumidor;
    p1, p2, p3, p4, p5 : TProductor;
 begin
    null; --Espera a que terminen las tareas
