@@ -5,13 +5,16 @@ with Ada.Numerics.Discrete_Random;
 procedure Main is
 
    procedure Producir (x : out Integer) is
-      subtype Rango is Integer range 1 .. 200; -- Rango de numeros producidos
+      subtype Rango is Integer range 1 .. 20; -- Rango de numeros producidos
       package Random_Proc is new Ada.Numerics.Discrete_Random (Rango);
       use Random_Proc;
       G : Generator;
    begin
       Reset (G);
       x := Random (G);
+      Put ("Produciendo el numero ");
+      Put (x);
+      New_Line (1);
    end Producir;
 
    task TBuffer is
@@ -29,21 +32,21 @@ procedure Main is
       pae  := 0;
       data := (-1, -1, -1, -1, -1);
       loop
+         Put_Line ("Entrando al buffer ");
          select when cant < 5 =>
                accept ins (x : in Integer) do
                   data (pai) := x;
-                  --Put_Line("Insertando el numero " & Integer'Image(x));
                end ins;
                pai  := (pai + 1) mod 5;
                cant := cant + 1;
-
+               Put_Line("llamada a insertar");
          or when cant > 0 =>
                accept ext (x : out Integer) do
                   x := data (pae);
-                  --Put_Line("Extrayendo el numero " & Integer'Image(x));
                end ext;
                pae  := (pae + 1) mod 5;
                cant := cant - 1;
+               Put_Line("llamada a ext");
          end select;
       end loop;
 
@@ -54,8 +57,10 @@ procedure Main is
       x : Integer;
    begin
       loop
+         Put ("Consumiendo el numero ");
          TBuffer.ext (x);
-         Put_Line("Consumiendo el numero " & Integer'Image(x));
+         Put (x);
+         New_Line (1);
       end loop;
    end TConsumidor;
 
@@ -67,12 +72,11 @@ procedure Main is
    begin
       loop
          Producir (x);
-         Put_Line ("Produciendo el numero " & Integer'Image(x));
          TBuffer.ins (x);
       end loop;
    end TProductor;
 
-   c1, c2, c3, c4, c5, c6  : TConsumidor;
+   c1, c2, c3         : TConsumidor;
    p1, p2, p3, p4, p5 : TProductor;
 begin
    null; --Espera a que terminen las tareas
